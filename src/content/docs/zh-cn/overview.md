@@ -23,6 +23,14 @@ StarVLA 是一个“乐高式”的模块化代码库，用于把视觉-语言�
 - 已支持：SimplerEnv、LIBERO、RoboCasa、RoboTwin、BEHAVIOR。
 - 规划中：SO101、CALVIN、RLBench。
 
+#### Benchmark 测试结果
+
+![StarVLA 在 SimplerEnv 上的测试结果。](../../../assets/starvla_simpleEnv.png)
+
+![StarVLA 在 LIBERO 上的测试结果。](../../../assets/starvla_LIBERO.png)
+
+![StarVLA 在 RoboCasa 上的测试结果。](../../../assets/stavla_RoboCasa.png)
+
 ### 训练策略
 
 - 单任务模仿学习。

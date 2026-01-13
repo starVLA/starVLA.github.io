@@ -23,6 +23,14 @@ Supported or planned benchmarks:
 - Supported: SimplerEnv, LIBERO, RoboCasa, RoboTwin, BEHAVIOR.
 - Planned: SO101, CALVIN, RLBench.
 
+#### Benchmark Results
+
+![StarVLA results on SimplerEnv.](../../assets/starvla_simpleEnv.png)
+
+![StarVLA results on LIBERO.](../../assets/starvla_LIBERO.png)
+
+![StarVLA results on RoboCasa.](../../assets/stavla_RoboCasa.png)
+
 ### Training Strategies
 
 - Single imitation learning.
