@@ -3,19 +3,19 @@ title: 常见问题
 description: StarVLA 设计选择与训练流程常见疑问。
 ---
 
-## 为什么不把预处理放在 dataloader？
+### 为什么不把预处理放在 dataloader？
 
 评测显示数据预处理耗时 <1%。将其放在 Framework 内能更灵活地处理模型特定逻辑，并避免在 dataloader 中引入假设。
 
-## 可以使用除 Qwen2.5-VL 之外的骨干模型吗？
+### 可以使用除 Qwen2.5-VL 之外的骨干模型吗？
 
 可以。实现新的视觉与语言模块并在 Framework 中组合即可。由于框架处理原始动作数据，替换骨干模型很直接。
 
-## 为什么没有抽象的 vision tower 接口？
+### 为什么没有抽象的 vision tower 接口？
 
 我们认为 VLM 将成为基础模型，并天然包含视觉塔，因此不需要额外抽象层。
 
-## 可以通过命令行覆盖或新增参数吗？
+### 可以通过命令行覆盖或新增参数吗？
 
 可以。StarVLA 使用 `OmegaConf.load(args.config_yaml)` 作为唯一配置入口，可通过 CLI 覆盖：
 
@@ -31,7 +31,7 @@ accelerate launch \
 
 `framework.action_model.new_module` 只新增配置项，行为由框架实现决定。
 
-## 可以通过参数冻结 VLM 吗？
+### 可以通过参数冻结 VLM 吗？
 
 可以，使用模块路径列表：
 
@@ -41,7 +41,7 @@ accelerate launch \
 
 提示：先 `print(your_model)` 获取模块路径。实现位于 `TrainerUtils.freeze_backbones`。
 
-## 不同模块可以设置不同学习率吗？
+### 不同模块可以设置不同学习率吗？
 
 可以，使用分组字典：
 
@@ -55,7 +55,7 @@ trainer:
 
 参考实现：`trainer_tools.build_param_lr_groups`。
 
-## 可以从 checkpoint 恢复训练吗？
+### 可以从 checkpoint 恢复训练吗？
 
 可以。配置示例：
 
@@ -67,7 +67,7 @@ trainer:
 
 `reload_modules` 为空则完整加载。StarVLA 不保存 optimizer state，以降低内存与磁盘开销。
 
-## 使用更小 VLM 训练
+### 使用更小 VLM 训练
 
 以 Florence-2 为例：
 

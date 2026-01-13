@@ -3,7 +3,7 @@ title: Lego-like Design
 description: The modular principles that make StarVLA easy to extend and debug.
 ---
 
-## 1) Smoke test any submodule
+## Smoke test any submodule
 
 StarVLA emphasizes modular model design. Each major framework file is executable for fast debugging and smoke tests:
 
@@ -17,7 +17,7 @@ python starVLA/dataloader/lerobot_datasets.py --config_yaml starvla_cotrain_oxe.
 
 **Design rule:** `starVLA/model/framework/<your_framework>.py` is the single external API surface of the model. It should mirror the framework diagram in your paper.
 
-## 2) Explicit model boundaries
+## Explicit model boundaries
 
 StarVLA follows top-down decomposition and high cohesion / low coupling. The dataloader must return a raw, model-agnostic dict without model-specific preprocessing.
 
@@ -30,7 +30,7 @@ A typical sample contains:
 
 Both `framework.forward()` and `framework.predict_action()` operate directly on raw inputs. This keeps train/test boundaries explicit and easy to hack.
 
-## 3) Flexible configuration system
+## Flexible configuration system
 
 StarVLA uses a single global configuration object. Parameters are passed via extensible dicts, allowing overrides and controlled redundancy.
 
@@ -47,7 +47,3 @@ accelerate launch \
 ```
 
 **Note:** `framework.action_model.new_module` only adds keys to the global config. Its behavior is defined in your framework implementation.
-
-## Design Notes
-
-For more details, see the design discussion in `assets/intro_v1.md` in the main repository.

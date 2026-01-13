@@ -3,19 +3,19 @@ title: FAQ
 description: Common questions about StarVLA design choices and training workflow.
 ---
 
-## Why not put preprocessing in the dataloader?
+### Why not put preprocessing in the dataloader?
 
 Data preprocessing takes <1% time in profiling. Keeping it inside the Framework allows model-specific handling without leaking assumptions into the dataloader.
 
-## Can I use a backbone other than Qwen2.5-VL?
+### Can I use a backbone other than Qwen2.5-VL?
 
 Yes. Implement new vision and language modules and compose them inside a Framework. Since the framework processes raw action data, swapping backbones is straightforward.
 
-## Why isn't there an abstract interface for the vision tower?
+### Why isn't there an abstract interface for the vision tower?
 
 We expect VLMs to be the base model and to include their own native vision tower, so an extra abstract interface is not required.
 
-## Can I override or add parameters via the terminal?
+### Can I override or add parameters via the terminal?
 
 Yes. StarVLA uses `OmegaConf.load(args.config_yaml)` as the single configuration entry. You can override values from the CLI:
 
@@ -31,7 +31,7 @@ accelerate launch \
 
 `framework.action_model.new_module` only adds to the global config; its behavior is defined by your framework.
 
-## Can I freeze the VLM via parameters?
+### Can I freeze the VLM via parameters?
 
 Yes. Use a comma-separated list of module paths:
 
@@ -41,7 +41,7 @@ Yes. Use a comma-separated list of module paths:
 
 Tip: run `print(your_model)` to verify module paths. Implementation lives in `TrainerUtils.freeze_backbones`.
 
-## Can I set different learning rates for different modules?
+### Can I set different learning rates for different modules?
 
 Yes. Use a per-module dict:
 
@@ -55,7 +55,7 @@ trainer:
 
 See `trainer_tools.build_param_lr_groups` for reference.
 
-## Can I resume training from a checkpoint?
+### Can I resume training from a checkpoint?
 
 Yes. Specify the latest checkpoint path in config:
 
@@ -67,7 +67,7 @@ trainer:
 
 An empty `reload_modules` loads the full model. StarVLA does not save optimizer state to reduce memory and disk usage.
 
-## Train with a smaller VLM
+### Train with a smaller VLM
 
 Example using Florence-2:
 

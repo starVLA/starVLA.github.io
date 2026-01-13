@@ -1,0 +1,54 @@
+---
+title: 快速开始
+description: 安装 StarVLA、完成环境验证、运行评测并训练基线。
+---
+
+import { Steps, Aside, FileTree } from '@astrojs/starlight/components';
+
+## 环境安装
+
+克隆主仓库并创建 Python 环境：
+
+```bash
+# Clone the repo
+git clone https://github.com/starVLA/starVLA
+
+# Create conda environment
+conda create -n starVLA python=3.10 -y
+conda activate starVLA
+
+# Install requirements
+pip install -r requirements.txt
+
+# Install FlashAttention2
+pip install flash-attn --no-build-isolation
+
+# Install starVLA
+pip install -e .
+```
+
+#### 常见问题：flash-attn
+
+`flash-attn` 需要与 CUDA 工具链（nvcc）和 PyTorch 版本匹配：
+
+```bash
+nvcc -V
+pip list | grep -E 'torch|transformers|flash-attn'
+```
+
+若安装失败，请选择与 CUDA 和 PyTorch 兼容的版本。已验证 `flash-attn==2.7.4.post1` 可在 nvcc `12.0` 与 `12.4` 上工作。
+
+## 快速验证 StarVLA
+
+<Steps>
+1. 下载基础模型并放在文件夹下：
+    ```bash
+    hf download Qwen/Qwen3-VL-4B-Instruct --local-dir ./playground/Pretrained_models/Qwen3-VL-4B-Instruct
+    ```
+2. 使用假数据进行框架自检：
+    ```bash
+    python starVLA/model/framework/QwenGR00T.py
+    ```
+    成功时会打印模型结构，且 `model.predict_action(fake_data)` 可返回未归一化动作。
+</Steps>
+
