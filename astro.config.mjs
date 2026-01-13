@@ -50,6 +50,17 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Benchmarks',
+					translations: { 'zh-CN': '基准测试' },
+					items: [
+						{
+							label: 'LIBERO',
+							slug: 'benchmarks/libero',
+							translations: { 'zh-CN': 'LIBERO' },
+						},
+					],
+				},
+				{
 					label: 'Resources',
 					translations: { 'zh-CN': '资源' },
 					items: [
@@ -70,6 +81,36 @@ export default defineConfig({
 					],
 				},
 			],
+
+			head: [
+				{
+					tag: 'script',
+					attrs: {
+						is: 'inline',
+					},
+					content: `
+						window.MathJax = {
+							tex: {
+								inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+								displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
+								processEscapes: true,
+								processEnvironments: true
+							},
+							options: {
+								skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+							}
+						};
+					`
+				},
+				{
+					tag: 'script',
+					attrs: {
+						id: 'MathJax-script',
+						async: true,
+						src: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+					}
+				}
+			]
 		}),
 	],
 });
