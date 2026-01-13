@@ -6,6 +6,9 @@ dist/
 # dependencies
 node_modules/
 
+# reference code (not part of this docs repo)
+code/
+
 # logs
 npm-debug.log*
 yarn-debug.log*
@@ -19,3 +22,5 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+AGENTS.md

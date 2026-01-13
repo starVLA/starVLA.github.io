@@ -1,0 +1,61 @@
+---
+title: StarVLA 文档
+description: 一个用于 VLM 到 VLA 的乐高式模块化代码库，覆盖框架、基准与训练流程。
+template: splash
+hero:
+  tagline: 用模块化、可扩展的代码库构建、训练并评测视觉-语言-动作模型。
+  actions:
+    - text: 快速开始
+      link: /zh-cn/getting-started/quick-start/
+    - text: 模型库
+      link: /zh-cn/model-zoo/
+    - text: GitHub
+      link: https://github.com/starVLA/starVLA
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## StarVLA 是什么？
+
+StarVLA 是一个用于开发视觉-语言模型（VLM）到视觉-语言-动作模型（VLA）的模块化代码库。模型、数据、训练、配置、评测等组件遵循高内聚低耦合原则，支持即插即用和快速迭代。
+
+## 文档速览
+
+<CardGrid stagger>
+  <Card title="🚀 快速开始" icon="rocket">
+    覆盖环境配置、快速验证、评测与训练流程。
+
+    [开始上手 →](/zh-cn/getting-started/quick-start/)
+  </Card>
+  <Card title="📖 项目概览" icon="document">
+    了解 StarVLA 的定位、能力与关键入口。
+
+    [阅读概览 →](/zh-cn/overview/)
+  </Card>
+  <Card title="🧩 乐高式设计" icon="puzzle">
+    了解模块化设计原则与边界定义。
+
+    [查看设计 →](/zh-cn/design/lego-like/)
+  </Card>
+  <Card title="🤖 模型库" icon="add-document">
+    已发布模型与微调检查点汇总。
+
+    [查看模型库 →](/zh-cn/model-zoo/)
+  </Card>
+  <Card title="📚 常见问题" icon="open-book">
+    配置、骨干模型与训练流程常见问答。
+
+    [阅读 FAQ →](/zh-cn/faq/)
+  </Card>
+</CardGrid>
+
+## 最新动态
+
+- 已建立 Behavior-1K、RoboTwin 2.0 与 CALVIN 的训练/评测流水线。
+- RoboCasa 评测支持已发布，无预训练即可达到 SOTA。
+- 回归测试已完成，持续更新见 Daily Development Log。
+
+## 语言说明
+
+文档提供英文与简体中文双语版本，请保持路径镜像与内容同步。
