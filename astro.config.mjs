@@ -6,7 +6,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'starVLA',
+			title: 'StarVLA',
 			defaultLocale: 'root',
 			locales: {
 				root: {
@@ -22,12 +22,14 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Overview',
+					translations: { 'zh-CN': '项目概览' },
 					items: [
 						{ label: 'Project Overview', slug: 'overview', translations: { 'zh-CN': '项目概览' } },
 					],
 				},
 				{
 					label: 'Getting Started',
+					translations: { 'zh-CN': '开始上手' },
 					items: [
 						{
 							label: 'Quick Start',
@@ -38,6 +40,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Core Concepts',
+					translations: { 'zh-CN': '核心概念' },
 					items: [
 						{
 							label: 'Lego-like Design',
@@ -48,6 +51,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Resources',
+					translations: { 'zh-CN': '资源' },
 					items: [
 						{ label: 'Model Zoo', slug: 'model-zoo', translations: { 'zh-CN': '模型库' } },
 						{ label: 'FAQ', slug: 'faq', translations: { 'zh-CN': '常见问题' } },
@@ -55,6 +59,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Community',
+					translations: { 'zh-CN': '社区' },
 					items: [
 						{ label: 'Contributing', slug: 'contributing', translations: { 'zh-CN': '贡献指南' } },
 						{
