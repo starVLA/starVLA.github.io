@@ -1,49 +1,75 @@
-# Starlight Starter Kit: Basics
+# starVLA.github.io Docs
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+This repo builds and deploys the documentation site for `starVLA.github.io` using Astro + Starlight.
 
-```
-pnpm create astro@latest -- --template starlight
-```
+## Quick Start (for non-frontend contributors)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### 1) Install Node.js (includes npm)
 
-## 🚀 Project Structure
+If you don’t have Node.js installed, follow this guide (recommended):  
+https://axi404.top/blog/common-commands#%E5%AE%89%E8%A3%85-nodejs
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+After installing, verify:
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+```bash
+node -v
+npm -v
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+Recommended: use **Node.js 20 LTS** (or newer).
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+### 2) Install pnpm
 
-Static assets, like favicons, can be placed in the `public/` directory.
+Option A (recommended): via Corepack (bundled with Node.js):
 
-## 🧞 Commands
+```bash
+corepack enable
+corepack prepare pnpm@9 --activate
+pnpm -v
+```
 
-All commands are run from the root of the project, from a terminal:
+Option B: via npm:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+```bash
+npm i -g pnpm@9
+pnpm -v
+```
 
-## 👀 Want to learn more?
+### 3) Install dependencies
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+```bash
+pnpm install
+```
+
+### 4) Start the local dev server (open a browser window)
+
+In one terminal window, run:
+
+```bash
+pnpm dev
+```
+
+Then open `http://localhost:4321/` in your browser.
+
+### 5) Build before merging (recommended)
+
+```bash
+pnpm build
+```
+
+## Where to edit docs
+
+- English docs: `src/content/docs/`
+- Chinese docs: `src/content/docs/zh-cn/` (mirror the English path)
+- Images/media: `src/assets/`
+- Static files (favicons, etc.): `public/`
+- Site config: `astro.config.mjs`
+
+Routes map to file paths. For example:
+
+- `src/content/docs/getting-started/quick-start.mdx` → `/getting-started/quick-start/`
+- `src/content/docs/zh-cn/getting-started/quick-start.mdx` → `/zh-cn/getting-started/quick-start/`
+
+## Deployment (GitHub Pages)
+
+GitHub Actions builds the site and deploys `dist/` to GitHub Pages on pushes to `main`.
