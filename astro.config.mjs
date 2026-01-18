@@ -81,6 +81,22 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Training Your Own Model',
+					translations: { 'zh-CN': '训练自己的模型' },
+					items: [
+						{
+							label: 'Co-Training with VLM Data',
+							slug: 'training/cotrain-vlm',
+							translations: { 'zh-CN': '与 VLM 数据联合训练' },
+						},
+						{
+							label: 'Use Your Own LeRobot Dataset',
+							slug: 'training/lerobot-dataset',
+							translations: { 'zh-CN': '使用自己的 LeRobot 数据集' },
+						},
+					],
+				},
+				{
 					label: 'Resources',
 					translations: { 'zh-CN': '资源' },
 					items: [
