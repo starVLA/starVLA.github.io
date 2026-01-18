@@ -58,6 +58,26 @@ export default defineConfig({
 							slug: 'benchmarks/libero',
 							translations: { 'zh-CN': 'LIBERO' },
 						},
+						{
+							label: 'SimplerEnv',
+							slug: 'benchmarks/simplerenv',
+							translations: { 'zh-CN': 'SimplerEnv' },
+						},
+						{
+							label: 'RoboCasa',
+							slug: 'benchmarks/robocasa',
+							translations: { 'zh-CN': 'RoboCasa' },
+						},
+						{
+							label: 'RoboTwin',
+							slug: 'benchmarks/robotwin',
+							translations: { 'zh-CN': 'RoboTwin' },
+						},
+						{
+							label: 'BEHAVIOR-1K',
+							slug: 'benchmarks/behavior',
+							translations: { 'zh-CN': 'BEHAVIOR-1K' },
+						},
 					],
 				},
 				{
