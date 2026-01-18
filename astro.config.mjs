@@ -47,6 +47,11 @@ export default defineConfig({
 							slug: 'design/lego-like',
 							translations: { 'zh-CN': '乐高式设计' },
 						},
+						{
+							label: 'Evaluation Framework',
+							slug: 'design/eval-protocol',
+							translations: { 'zh-CN': '评测框架' },
+						},
 					],
 				},
 				{
