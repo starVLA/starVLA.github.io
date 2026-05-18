@@ -30,5 +30,7 @@ export const contributors: Contributor[] = [
   { name: 'Hanwen Wan' },
   { name: 'Zhijie-Song' },
   { name: 'Changjiu Zhang' },
+  { name: 'Manling Li'},
+  { name: 'Zihan Wang'},
   { name: 'Jiaya Jia' },
 ];
