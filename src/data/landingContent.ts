@@ -1,5 +1,7 @@
 export type Locale = 'en' | 'zh';
 const DOCS_BASE = 'https://starvla.github.io/docs';
+const GITHUB_REPO = 'starVLA/starVLA';
+const GITHUB_REPO_API = `https://api.github.com/repos/${GITHUB_REPO}`;
 
 export const landingContent = {
   meta: {
@@ -33,21 +35,36 @@ export const landingContent = {
     {
       key: 'stars',
       label: { en: 'GitHub Stars', zh: 'GitHub Stars' },
-      badgeUrl: 'https://img.shields.io/github/stars/starVLA/starVLA.json',
+      badgeUrl: 'https://img.shields.io/badge/dynamic/json.json',
+      badgeSourceUrl: GITHUB_REPO_API,
+      badgeQuery: '$.stargazers_count',
+      badgeLabel: 'stars',
+      fallbackBadgeUrl: `https://img.shields.io/github/stars/${GITHUB_REPO}.json`,
+      valueFormat: 'compact-number',
       fallback: '1.5k',
       href: 'https://github.com/starVLA/starVLA/stargazers',
     },
     {
       key: 'forks',
       label: { en: 'Forks', zh: 'Forks' },
-      badgeUrl: 'https://img.shields.io/github/forks/starVLA/starVLA.json',
+      badgeUrl: `https://img.shields.io/github/forks/${GITHUB_REPO}.json`,
+      badgeSourceUrl: '',
+      badgeQuery: '',
+      badgeLabel: '',
+      fallbackBadgeUrl: '',
+      valueFormat: '',
       fallback: '174',
       href: 'https://github.com/starVLA/starVLA/network',
     },
     {
       key: 'issues',
       label: { en: 'Open Issues', zh: 'Open Issues' },
-      badgeUrl: 'https://img.shields.io/github/issues/starVLA/starVLA.json',
+      badgeUrl: `https://img.shields.io/github/issues/${GITHUB_REPO}.json`,
+      badgeSourceUrl: '',
+      badgeQuery: '',
+      badgeLabel: '',
+      fallbackBadgeUrl: '',
+      valueFormat: '',
       fallback: '16 open',
       href: 'https://github.com/starVLA/starVLA/issues',
     },

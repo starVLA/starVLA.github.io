@@ -49,6 +49,11 @@ const featureIconMap: Record<string, string> = {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-badge-url={metric.badgeUrl}
+                data-badge-source-url={metric.badgeSourceUrl}
+                data-badge-query={metric.badgeQuery}
+                data-badge-label={metric.badgeLabel}
+                data-fallback-badge-url={metric.fallbackBadgeUrl}
+                data-value-format={metric.valueFormat}
               >
                 <span class="metric-label">
                   <BiText en={metric.label.en} zh={metric.label.zh} />
@@ -509,19 +514,82 @@ const featureIconMap: Record<string, string> = {
 
     window.addEventListener('starvla:locale', () => renderQuickStart());
 
+    async function fetchShield(url, params) {
+      try {
+        const shieldUrl = new URL(url);
+        if (params) {
+          Object.entries(params).forEach(([key, value]) => {
+            if (value) shieldUrl.searchParams.set(key, value);
+          });
+        }
+
+        const res = await fetch(shieldUrl.toString(), {
+          cache: 'no-store',
+          referrerPolicy: 'no-referrer',
+        });
+        if (!res.ok) throw new Error('Request failed');
+        return await res.json();
+      } catch {
+        return null;
+      }
+    }
+
+    function normalizeBadgeValue(value, fallback = '') {
+      const text = String(value || '').trim();
+      if (!text) return fallback;
+
+      const lowered = text.toLowerCase();
+      if (['invalid', 'unknown', 'inaccessible', 'not found', 'error'].includes(lowered)) {
+        return fallback;
+      }
+
+      return text;
+    }
+
+    function formatGithubCount(value) {
+      const parsed = Number(String(value || '').replace(/,/g, '').trim());
+      if (!Number.isFinite(parsed)) return '';
+
+      return Intl.NumberFormat('en-us', {
+        notation: 'compact',
+        maximumFractionDigits: 1,
+      }).format(parsed);
+    }
+
+    function getBadgeText(data) {
+      return data?.message || data?.value || '';
+    }
+
     async function hydrateMetric(card) {
       const valueEl = card.querySelector('[data-metric-value]');
       const badgeUrl = card.getAttribute('data-badge-url');
       if (!valueEl || !badgeUrl) return;
 
-      try {
-        const res = await fetch(badgeUrl, { cache: 'no-store' });
-        if (!res.ok) throw new Error('Request failed');
-        const data = await res.json();
-        valueEl.textContent = data.value || data.message || valueEl.dataset.fallback || '—';
-      } catch {
-        valueEl.textContent = valueEl.dataset.fallback || '—';
+      const sourceUrl = card.getAttribute('data-badge-source-url');
+      const badgeQuery = card.getAttribute('data-badge-query');
+      const badgeLabel = card.getAttribute('data-badge-label');
+      const fallbackBadgeUrl = card.getAttribute('data-fallback-badge-url');
+      const valueFormat = card.getAttribute('data-value-format');
+
+      const primaryData =
+        sourceUrl && badgeQuery
+          ? await fetchShield(badgeUrl, {
+              url: sourceUrl,
+              query: badgeQuery,
+              label: badgeLabel,
+            })
+          : await fetchShield(badgeUrl);
+
+      const primaryText = normalizeBadgeValue(getBadgeText(primaryData));
+      const formattedPrimary = valueFormat === 'compact-number' ? formatGithubCount(primaryText) : '';
+      if (formattedPrimary || primaryText) {
+        valueEl.textContent = formattedPrimary || primaryText;
+        return;
       }
+
+      const fallbackData = fallbackBadgeUrl ? await fetchShield(fallbackBadgeUrl) : null;
+      const fallbackText = normalizeBadgeValue(getBadgeText(fallbackData));
+      valueEl.textContent = fallbackText || valueEl.dataset.fallback || '—';
     }
 
     document.querySelectorAll('[data-badge-url]').forEach((card) => hydrateMetric(card));
