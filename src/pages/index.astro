@@ -535,7 +535,7 @@ const featureIconMap: Record<string, string> = {
     }
 
     function normalizeBadgeValue(value, fallback = '') {
-      const text = String(value || '').trim();
+      const text = String(value ?? '').trim();
       if (!text) return fallback;
 
       const lowered = text.toLowerCase();
@@ -547,7 +547,10 @@ const featureIconMap: Record<string, string> = {
     }
 
     function formatGithubCount(value) {
-      const parsed = Number(String(value || '').replace(/,/g, '').trim());
+      const text = String(value ?? '').replace(/,/g, '').trim();
+      if (!text) return '';
+
+      const parsed = Number(text);
       if (!Number.isFinite(parsed)) return '';
 
       return Intl.NumberFormat('en-us', {
@@ -557,7 +560,7 @@ const featureIconMap: Record<string, string> = {
     }
 
     function getBadgeText(data) {
-      return data?.message || data?.value || '';
+      return data?.message ?? data?.value ?? '';
     }
 
     async function hydrateMetric(card) {
